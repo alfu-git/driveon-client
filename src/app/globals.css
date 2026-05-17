@@ -1,2 +1,37 @@
 @import "tailwindcss";
 @import "@heroui/styles";
+
+a {
+  text-decoration: none;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-manrope);
+    background-color: #020909;
+    color: #fafafa;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-orbitron);
+  }
+}
+
+@layer utilities {
+  .font-secondary {
+    font-family: var(--font-orbitron);
+  }
+}
+
+:root {
+  --primary: #B81D23;
+}
+
+.text-primary {
+  color: var(--primary);
+}
