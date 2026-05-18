@@ -15,12 +15,12 @@ const Banner = () => {
       <div className="relative max-w-7xl mx-auto px-5 w-full h-full py-20 md:py-30 lg:py-40">
         <div>
           <div>
-            <h1 className="text-[32px] sm:text-4xl md:text-[50px] md:max-w-full lg:max-w-180 font-bold leading-tight">
+            <h1 className="text-[32px] text-[#FAFAFA] sm:text-4xl md:text-[50px] md:max-w-full lg:max-w-180 font-bold leading-tight">
               Drive Without <span className="text-primary">Limits</span> Arrive
               Without Stress
             </h1>
 
-            <p className="mt-7 max-w-110 md:text-lg font-medium">
+            <p className="mt-7 max-w-110 md:text-lg text-[#FAFAFA] font-medium">
               Modern car rental for modern travelers.Experience smooth, fast and
               reliable travel.
             </p>

@@ -20,6 +20,7 @@ const GoogleLoginBtn = () => {
     <div className="flex justify-center">
       <Button
         onClick={handleGoogleLogin}
+        isDisabled={loading}
         variant="outline"
         className={
           "px-15 flex gap-4 rounded-lg hover:bg-zinc-100 dark:hover:text-[#020909] active:bg-zinc-200"

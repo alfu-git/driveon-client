@@ -14,13 +14,26 @@ const Navbar = () => {
 
   const pathname = usePathname();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const linkColor = isSticky
+    ? "text-[#FAFAFA] dark:text-[#FAFAFA]"
+    : "text-[#020909]! dark:text-[#FAFAFA]";
+
   const navLinks = (
     <>
       <li>
         <Link
           className={`
-            text-base
-        ${pathname === "/" ? "text-primary font-medium" : ""}
+            text-base ${linkColor}
+        ${pathname === "/" ? "text-[#b81d23]! font-bold" : "font-normal"}
           `}
           href="/"
         >
@@ -31,8 +44,8 @@ const Navbar = () => {
       <li>
         <Link
           className={`
-            text-base
-        ${pathname === "/explore-cars" ? "text-primary font-medium" : ""}
+            text-base ${linkColor}
+        ${pathname === "/explore-cars" ? "text-[#b81d23]! font-bold" : "font-normal"}
           `}
           href="/explore-cars"
         >
@@ -43,8 +56,8 @@ const Navbar = () => {
       <li>
         <Link
           className={`
-            text-base
-        ${pathname === "/add-car" ? "text-primary font-medium" : ""}
+            text-base ${linkColor}
+        ${pathname === "/add-car" ? "text-[#b81d23]! font-bold" : "font-normal"}
           `}
           href="/add-car"
         >
@@ -55,8 +68,8 @@ const Navbar = () => {
       <li>
         <Link
           className={`
-            text-base
-        ${pathname === "/my-bookings" ? "text-primary font-medium" : ""}
+            text-base ${linkColor}
+        ${pathname === "/my-bookings" ? "text-[#b81d23]! font-bold" : "font-normal"}
           `}
           href="/my-bookings"
         >
@@ -67,8 +80,8 @@ const Navbar = () => {
       <li>
         <Link
           className={`
-            text-base
-        ${pathname === "/my-added-cars" ? "text-primary font-medium" : ""}
+            text-base ${linkColor}
+        ${pathname === "/my-added-cars" ? "text-[#b81d23]! font-bold" : "font-normal"}
           `}
           href="/my-added-cars"
         >
@@ -78,21 +91,12 @@ const Navbar = () => {
     </>
   );
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <nav
       className={`sticky top-0 z-40 w-full transition-all duration-500
   ${
     isSticky
-      ? "backdrop-blur-md bg-[#020909] dark:bg-white/5 dark:border-white/10 shadow-2xl"
+      ? "bg-[#020909] dark:bg-white/5 dark:backdrop-blur-md dark:shadow-2xl"
       : "bg-transparent"
   }`}
     >
@@ -132,9 +136,7 @@ const Navbar = () => {
           <div className="hidden sm:block">
             <Link href="/login">
               <Button
-                className={
-                  "h-auto px-0 bg-transparent text-base text-[#020909]! dark:text-[#FAFAFA]!"
-                }
+                className={`h-auto px-0 bg-transparent text-base ${linkColor}`}
               >
                 Login/
               </Button>
