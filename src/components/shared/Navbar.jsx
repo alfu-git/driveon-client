@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { VscMenu } from "react-icons/vsc";
 import Image from "next/image";
 import { X } from "lucide-react";
+import ThemeToggleButton from "./ThemeToggleButton";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +20,7 @@ const Navbar = () => {
         <Link
           className={`
             text-base
-        ${pathname === "/" ? "text-primary font-medium" : "text-[#FAFAFA]"}
+        ${pathname === "/" ? "text-primary font-medium" : ""}
           `}
           href="/"
         >
@@ -31,11 +32,7 @@ const Navbar = () => {
         <Link
           className={`
             text-base
-        ${
-          pathname === "/explore-cars"
-            ? "text-primary font-medium"
-            : "text-[#FAFAFA]"
-        }
+        ${pathname === "/explore-cars" ? "text-primary font-medium" : ""}
           `}
           href="/explore-cars"
         >
@@ -47,11 +44,7 @@ const Navbar = () => {
         <Link
           className={`
             text-base
-        ${
-          pathname === "/add-car"
-            ? "text-primary font-medium"
-            : "text-[#FAFAFA]"
-        }
+        ${pathname === "/add-car" ? "text-primary font-medium" : ""}
           `}
           href="/add-car"
         >
@@ -63,11 +56,7 @@ const Navbar = () => {
         <Link
           className={`
             text-base
-        ${
-          pathname === "/my-bookings"
-            ? "text-primary font-medium"
-            : "text-[#FAFAFA]"
-        }
+        ${pathname === "/my-bookings" ? "text-primary font-medium" : ""}
           `}
           href="/my-bookings"
         >
@@ -79,11 +68,7 @@ const Navbar = () => {
         <Link
           className={`
             text-base
-        ${
-          pathname === "/my-added-cars"
-            ? "text-primary font-medium"
-            : "text-[#FAFAFA]"
-        }
+        ${pathname === "/my-added-cars" ? "text-primary font-medium" : ""}
           `}
           href="/my-added-cars"
         >
@@ -107,34 +92,34 @@ const Navbar = () => {
       className={`sticky top-0 z-40 w-full transition-all duration-500
   ${
     isSticky
-      ? "backdrop-blur-md bg-white/5 border-b border-white/10 shadow-2xl"
+      ? "backdrop-blur-md bg-[#020909] dark:bg-white/5 dark:border-white/10 shadow-2xl"
       : "bg-transparent"
   }`}
     >
       <header className="h-17 flex items-center justify-between max-w-7xl mx-auto px-5">
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-3">
           <Button
             className="lg:hidden px-0 max-h-fit bg-transparent"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
-              <span className="block py-0.5 px-1 hover:bg-[#B81D23] rounded-md">
+              <span className="block py-0.5 px-1 hover:bg-[#B81D23] rounded-md text-[#020909]! dark:text-[#FAFAFA]! hover:text-[#FAFAFA]! transition-colors duration-300">
                 <X />
               </span>
             ) : (
-              <span className="block py-1 px-2 hover:bg-[#B81D23] rounded-md">
+              <span className="block py-1 px-2 hover:bg-[#B81D23] rounded-md text-[#020909]! dark:text-[#FAFAFA]! hover:text-[#FAFAFA]! transition-colors duration-300">
                 <VscMenu />
               </span>
             )}
           </Button>
 
-          <Link href="/" className={"mt-2"}>
+          <Link href="/">
             <Image
               src={"/assets/driveon-logo.png"}
               alt="DriveOn Logo"
-              width={150}
-              height={150}
+              width={130}
+              height={130}
               className="cursor-pointer"
               priority
             />
@@ -143,22 +128,30 @@ const Navbar = () => {
 
         <ul className="hidden items-center gap-4 lg:flex">{navLinks}</ul>
 
-        <div>
-          <Link href="/login">
-            <Button className={"h-auto px-0 bg-transparent text-base"}>
-              Login/
-            </Button>
-          </Link>
+        <div className="flex gap-3 items-center">
+          <div className="hidden sm:block">
+            <Link href="/login">
+              <Button
+                className={
+                  "h-auto px-0 bg-transparent text-base text-[#020909]! dark:text-[#FAFAFA]!"
+                }
+              >
+                Login/
+              </Button>
+            </Link>
 
-          <Link href="/register">
-            <Button
-              className={
-                "h-auto px-0 bg-transparent text-primary font-medium text-base"
-              }
-            >
-              Register
-            </Button>
-          </Link>
+            <Link href="/register">
+              <Button
+                className={
+                  "h-auto px-0 bg-transparent text-primary font-medium text-base"
+                }
+              >
+                Register
+              </Button>
+            </Link>
+          </div>
+
+          <ThemeToggleButton />
         </div>
       </header>
 

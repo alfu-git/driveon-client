@@ -1,5 +1,7 @@
 import { Orbitron, Manrope } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/shared/Navbar";
+import ThemeProviderWrapper from "@/components/shared/ThemeProviderWrapper";
 
 const orbitron = Orbitron({
   variable: "--font-orbitron",
@@ -21,8 +23,14 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className={`${orbitron.variable} ${manrope.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#FAFAFA] dark:bg-[#020909] text-[#020909] dark:text-[#FAFAFA]">
+        <ThemeProviderWrapper>
+          <Navbar />
+          {children}
+        </ThemeProviderWrapper>
+      </body>
     </html>
   );
 }

@@ -1,9 +1,7 @@
-import Navbar from "@/components/shared/Navbar";
+"use client"
 
 export default function Home() {
-  return (
-    <>
-      <Navbar />
-    </>
-  );
+  return <>
+  <p>apewisulgs;oizdfkh n</p>
+  </>;
 }
