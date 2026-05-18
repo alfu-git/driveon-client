@@ -11,12 +11,12 @@ import {
   TextField,
 } from "@heroui/react";
 import { Eye, Lock, User } from "lucide-react";
-import { FaGoogle } from "react-icons/fa";
 import Link from "next/link";
 import { IoIosLink } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
+import GoogleLoginBtn from "../shared/GoogleLoginBtn";
 
 const RegisterForm = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -207,20 +207,7 @@ const RegisterForm = () => {
         <div className="grow border-t border-[#6E5F5D] dark:border-[#FAFAFA]"></div>
       </div>
 
-      <div className="flex justify-center">
-        <Button
-          variant="outline"
-          className={
-            "px-15 flex gap-4 rounded-lg hover:bg-zinc-100 dark:hover:text-[#020909] active:bg-zinc-200"
-          }
-        >
-          <span>
-            <FaGoogle />
-          </span>
-
-          <span>Google</span>
-        </Button>
-      </div>
+      <GoogleLoginBtn />
 
       <p className="my-6 flex gap-1 flex-wrap justify-center text-xs text-center">
         <span>By creating an account, you agree to our</span>

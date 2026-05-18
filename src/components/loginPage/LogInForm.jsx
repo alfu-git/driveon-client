@@ -16,6 +16,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
+import GoogleLoginBtn from "../shared/GoogleLoginBtn";
 
 const LogInForm = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -162,20 +163,7 @@ const LogInForm = () => {
         <div className="grow border-t border-[#6E5F5D] dark:border-[#FAFAFA]"></div>
       </div>
 
-      <div className="flex justify-center">
-        <Button
-          variant="outline"
-          className={
-            "px-15 flex gap-4 rounded-lg hover:bg-zinc-100 dark:hover:text-[#020909] active:bg-zinc-200"
-          }
-        >
-          <span>
-            <FaGoogle />
-          </span>
-
-          <span>Google</span>
-        </Button>
-      </div>
+      <GoogleLoginBtn />
 
       <p className="mt-6 text-center text-sm">
         Don&apos;t have an account?{" "}
