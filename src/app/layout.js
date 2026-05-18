@@ -2,6 +2,7 @@ import { Orbitron, Manrope } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import ThemeProviderWrapper from "@/components/shared/ThemeProviderWrapper";
+import { Toaster } from "react-hot-toast";
 
 const orbitron = Orbitron({
   variable: "--font-orbitron",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
         <ThemeProviderWrapper>
           <Navbar />
           {children}
+          <Toaster />
         </ThemeProviderWrapper>
       </body>
     </html>

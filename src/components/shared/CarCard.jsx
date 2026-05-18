@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "@heroui/react";
 import { TbArmchair } from "react-icons/tb";
+import { FaCar, FaMapPin } from "react-icons/fa";
 
 const CarCard = ({ car }) => {
   return (
@@ -31,7 +32,7 @@ const CarCard = ({ car }) => {
       </div>
 
       {/* Content */}
-      <div className="p-5 space-y-3">
+      <div className="p-5 flex flex-col gap-y-4 h-full">
         {/* Brand + Name */}
         <div className="flex items-center gap-2">
           <Image
@@ -44,32 +45,41 @@ const CarCard = ({ car }) => {
           <p className="text-xs text-gray-400">{car.brandName}</p>
         </div>
 
-        <h3 className="text-lg font-semibold">{car.carName}</h3>
+        <h3 className="text-2xl font-semibold">{car.carName}</h3>
 
         {/* Price */}
         <div className="flex items-center justify-between">
-          <p className="text-xl font-bold text-primary">
-            ${car.dailyRentPrice}{" "}
-            <span className="text-xs text-gray-400">/day</span>
-          </p>
+          <div className="flex items-baseline">
+            <span className="text-2xl font-bold">${car.dailyRentPrice}</span>
+            <span className="text-sm ">/day</span>
+          </div>
 
-          <span className="text-xs text-gray-400">{car.category}</span>
+          <span className="text-sm">{car.category}</span>
         </div>
 
         {/* Info Row */}
-        <div className="flex items-center justify-between text-xs text-gray-400">
-          <span>🚗 {car.carType}</span>
+        <div className="flex items-center justify-between text-sm">
           <span className="flex gap-2 items-center">
-            <TbArmchair /> <span>{car.seatCapacity} Seats</span>
+            <FaCar className="text-primary" /> <span>{car.carType}</span>
+          </span>
+
+          <span className="flex gap-2 items-center">
+            <TbArmchair className="text-primary" />{" "}
+            <span>{car.seatCapacity} Seats</span>
           </span>
         </div>
 
         {/* Location */}
-        <p className="text-xs text-gray-500">📍 {car.pickupLocation}</p>
+        <p className="text-sm flex gap-2 items-center">
+          <FaMapPin className="text-primary" />{" "}
+          <span>{car.pickupLocation}</span>{" "}
+        </p>
 
         {/* Buttons */}
 
-        <Button className="mt-3 w-full bg-primary">View Details</Button>
+        <Button className="mt-3 w-full bg-[#B81D23] hover:bg-[#B81D23]/80 active:bg-[#91060a]">
+          View Details
+        </Button>
       </div>
     </div>
   );

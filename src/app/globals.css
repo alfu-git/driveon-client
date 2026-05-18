@@ -26,8 +26,10 @@ a {
   }
 }
 
+/* dark red: #8F161B */
+
 :root {
-  --primary: #B81D23;
+  --primary: #b81d23;
 }
 
 .text-primary {
