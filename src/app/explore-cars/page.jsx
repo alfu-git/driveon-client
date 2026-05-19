@@ -4,7 +4,7 @@ import React from "react";
 
 const ExploreCarsPage = async () => {
   const cars = await getAllCars();
-  console.log(cars);
+
   return (
     <section className="my-20 max-w-7xl mx-auto w-full px-5">
       <div>

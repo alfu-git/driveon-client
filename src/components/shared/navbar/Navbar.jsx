@@ -2,17 +2,21 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, Button } from "@heroui/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { VscMenu } from "react-icons/vsc";
 import Image from "next/image";
 import { X } from "lucide-react";
-import ThemeToggleButton from "./ThemeToggleButton";
+import ThemeToggleButton from "../ThemeToggleButton";
+import { authClient } from "@/lib/auth-client";
+import AvatarDropdown from "./AvatarDropdown";
+import Spinner from "../Spinner";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,9 +27,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const linkColor = isSticky
-    ? "text-[#FAFAFA] dark:text-[#FAFAFA]"
-    : "text-[#020909]! dark:text-[#FAFAFA]";
+  const linkColor = isSticky ? "text-white" : "text-black dark:text-white";
 
   const navLinks = (
     <>
@@ -76,20 +78,11 @@ const Navbar = () => {
           My Bookings
         </Link>
       </li>
-
-      <li>
-        <Link
-          className={`
-            text-base ${linkColor}
-        ${pathname === "/my-added-cars" ? "text-[#b81d23]! font-bold" : "font-normal"}
-          `}
-          href="/my-added-cars"
-        >
-          My Added Cars
-        </Link>
-      </li>
     </>
   );
+
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
 
   return (
     <nav
@@ -132,26 +125,32 @@ const Navbar = () => {
 
         <ul className="hidden items-center gap-4 lg:flex">{navLinks}</ul>
 
-        <div className="flex gap-3 items-center">
-          <div className="hidden sm:block">
-            <Link href="/login">
-              <Button
-                className={`h-auto px-0 bg-transparent text-base ${linkColor}`}
-              >
-                Login/
-              </Button>
-            </Link>
+        <div className="flex gap-2 items-center">
+          {isPending ? (
+            <Spinner size={24} />
+          ) : user ? (
+            <AvatarDropdown user={user} />
+          ) : (
+            <div>
+              <Link href="/login">
+                <Button
+                  className={`h-auto px-0 bg-transparent text-base ${linkColor}`}
+                >
+                  Login/
+                </Button>
+              </Link>
 
-            <Link href="/register">
-              <Button
-                className={
-                  "h-auto px-0 bg-transparent text-primary font-medium text-base"
-                }
-              >
-                Register
-              </Button>
-            </Link>
-          </div>
+              <Link href="/register">
+                <Button
+                  className={
+                    "h-auto px-0 bg-transparent text-primary font-medium text-base"
+                  }
+                >
+                  Register
+                </Button>
+              </Link>
+            </div>
+          )}
 
           <ThemeToggleButton />
         </div>

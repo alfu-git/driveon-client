@@ -1,9 +1,9 @@
 import { Orbitron, Manrope } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/shared/Navbar";
 import ThemeProviderWrapper from "@/components/shared/ThemeProviderWrapper";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/shared/Footer";
+import Navbar from "@/components/shared/navbar/Navbar";
 
 const orbitron = Orbitron({
   variable: "--font-orbitron",
