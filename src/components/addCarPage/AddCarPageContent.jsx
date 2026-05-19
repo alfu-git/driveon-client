@@ -19,7 +19,7 @@ const AddCarPageContent = ({ carAddAction }) => {
 
       {/* image */}
       <motion.div
-        className="relative hidden w-full lg:1/2 flex-1 lg:block"
+        className="relative hidden w-full lg:1/2 flex-1 lg:block shadow-2xl"
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}

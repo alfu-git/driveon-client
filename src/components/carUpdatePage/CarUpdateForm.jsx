@@ -20,7 +20,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 
-const AddCarForm = ({ carAddAction }) => {
+const CarUpdateForm = ({ car, carEditActionWrapper }) => {
   const [carType, setCarType] = useState("");
   const [availability, setAvailability] = useState("");
 
@@ -31,65 +31,26 @@ const AddCarForm = ({ carAddAction }) => {
 
   return (
     <div className="dark:bg-white/5 dark:backdrop-blur-md shadow-2xl p-8 md:p-10">
-      <Form action={carAddAction} className="space-y-6">
-        {/* car name */}
+      <Form action={carEditActionWrapper} className="space-y-6">
+        {/* price */}
         <TextField isRequired>
-          <Label>Car Name</Label>
+          <Label>Daily Rent</Label>
 
           <InputGroup className={inputGroupClass}>
             <InputGroup.Prefix>
-              <Car className={iconClass} />
+              <DollarSign className={iconClass} />
             </InputGroup.Prefix>
 
             <InputGroup.Input
-              name="carName"
-              placeholder="Toyota Corolla 2024"
-              className="pl-1 bg-transparent"
+              name="rentPrice"
+              type="number"
+              min={30}
+              placeholder={car?.dailyRentPrice}
+              className="pl-1 bg-transparent text-white"
             />
           </InputGroup>
           <FieldError />
         </TextField>
-
-        {/* price + seat */}
-        <div className="grid md:grid-cols-2 gap-4">
-          <TextField isRequired>
-            <Label>Daily Rent</Label>
-
-            <InputGroup className={inputGroupClass}>
-              <InputGroup.Prefix>
-                <DollarSign className={iconClass} />
-              </InputGroup.Prefix>
-
-              <InputGroup.Input
-                name="rentPrice"
-                type="number"
-                min={30}
-                placeholder="1200"
-                className="pl-1 bg-transparent text-white"
-              />
-            </InputGroup>
-            <FieldError />
-          </TextField>
-
-          <TextField isRequired>
-            <Label>Seat Capacity</Label>
-
-            <InputGroup className={inputGroupClass}>
-              <InputGroup.Prefix>
-                <Users className={iconClass} />
-              </InputGroup.Prefix>
-
-              <InputGroup.Input
-                name="seatCapacity"
-                type="number"
-                min={1}
-                placeholder="4"
-                className="pl-2 bg-transparent text-white"
-              />
-            </InputGroup>
-            <FieldError />
-          </TextField>
-        </div>
 
         {/* car type */}
         <TextField isRequired>
@@ -101,7 +62,7 @@ const AddCarForm = ({ carAddAction }) => {
                 "px-3 py-3 w-full rounded-lg h-auto justify-between bg-transparent dark:bg-white/1 text-zinc-500 dark:text-white/30 shadow-sm"
               }
             >
-              {carType || "Select type"} <ChevronDown />
+              {carType || car?.category || "Select type"} <ChevronDown />
             </Button>
 
             <Dropdown.Popover className={"rounded-md"}>
@@ -129,42 +90,23 @@ const AddCarForm = ({ carAddAction }) => {
           <input type="hidden" name="carType" value={carType} />
         </TextField>
 
-        {/* image + location */}
-        <div className="grid md:grid-cols-2 gap-4">
-          <TextField isRequired>
-            <Label>Image URL</Label>
+        {/* location */}
+        <TextField isRequired>
+          <Label>Pickup Location</Label>
 
-            <InputGroup className={inputGroupClass}>
-              <InputGroup.Prefix>
-                <ImageIcon className={iconClass} />
-              </InputGroup.Prefix>
+          <InputGroup className={inputGroupClass}>
+            <InputGroup.Prefix>
+              <MapPin className={iconClass} />
+            </InputGroup.Prefix>
 
-              <InputGroup.Input
-                name="imageUrl"
-                placeholder="https://..."
-                className="pl-1"
-              />
-            </InputGroup>
-            <FieldError />
-          </TextField>
-
-          <TextField isRequired>
-            <Label>Pickup Location</Label>
-
-            <InputGroup className={inputGroupClass}>
-              <InputGroup.Prefix>
-                <MapPin className={iconClass} />
-              </InputGroup.Prefix>
-
-              <InputGroup.Input
-                name="pickupLocation"
-                placeholder="Dhaka Airport"
-                className="pl-1"
-              />
-            </InputGroup>
-            <FieldError />
-          </TextField>
-        </div>
+            <InputGroup.Input
+              name="pickupLocation"
+              placeholder={car?.pickupLocation}
+              className="pl-1"
+            />
+          </InputGroup>
+          <FieldError />
+        </TextField>
 
         {/* description */}
         <TextField isRequired>
@@ -177,7 +119,7 @@ const AddCarForm = ({ carAddAction }) => {
 
             <InputGroup.Input
               name="description"
-              placeholder="Write short details about the car..."
+              placeholder={car?.description}
               className="pl-1  dark:text-white"
             />
           </InputGroup>
@@ -194,7 +136,11 @@ const AddCarForm = ({ carAddAction }) => {
                 "px-3 py-3 w-full rounded-lg h-auto justify-between bg-transparent dark:bg-white/1 text-zinc-500 dark:text-white/30 shadow-sm"
               }
             >
-              {availability || "Availability"} <ChevronDown />
+              {availability ||
+                (car?.availabilityStatus === true
+                  ? "Available"
+                  : "Not Available")}{" "}
+              <ChevronDown />
             </Button>
 
             <Dropdown.Popover className={"rounded-md"}>
@@ -216,15 +162,12 @@ const AddCarForm = ({ carAddAction }) => {
           <FieldError />
         </TextField>
 
-        <Button
-          type="submit"
-          className="w-full bg-[#B81D23] hover:bg-[#B81D23]/80 active:bg-[#8F161B]/90 rounded-md"
-        >
-          Add Car Listing
+        <Button type="submit" className="w-full  rounded-md">
+          Update
         </Button>
       </Form>
     </div>
   );
 };
 
-export default AddCarForm;
+export default CarUpdateForm;

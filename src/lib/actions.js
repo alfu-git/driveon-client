@@ -47,3 +47,38 @@ export const carAddAction = async (formData) => {
 
   return result;
 };
+
+export const carEditAction = async (carId, formData) => {
+  "use server";
+
+  const carData = Object.fromEntries(formData.entries());
+
+  const updatedCarData = {
+    category: carData?.carType,
+    dailyRentPrice: Number(carData?.rentPrice),
+    pickupLocation: carData?.pickupLocation,
+    description: carData?.description,
+    availabilityStatus: carData?.availability === "Available",
+  };
+
+  const res = await fetch(`http://localhost:5000/added-cars/${carId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedCarData),
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to update car data");
+  }
+
+  const result = await res.json();
+
+  if (result?.modifiedCount > 0) {
+    revalidatePath("/my-added-cars");
+    redirect("/my-added-cars");
+  }
+
+  return result;
+};
