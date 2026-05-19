@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "@heroui/react";
 import { TbArmchair } from "react-icons/tb";
 import { FaCar, FaMapPin } from "react-icons/fa";
+import Link from "next/link";
 
 const CarCard = ({ car }) => {
   return (
@@ -76,10 +77,11 @@ const CarCard = ({ car }) => {
         </p>
 
         {/* Buttons */}
-
-        <Button className="mt-3 w-full bg-[#B81D23] hover:bg-[#B81D23]/80 active:bg-[#91060a]">
-          View Details
-        </Button>
+        <Link href={`/explore-cars/${car._id}`}>
+          <Button className="mt-3 w-full bg-[#B81D23] hover:bg-[#B81D23]/80 active:bg-[#91060a] rounded-md">
+            View Details
+          </Button>
+        </Link>
       </div>
     </div>
   );

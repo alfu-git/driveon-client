@@ -9,7 +9,9 @@ const AvatarDropdown = ({ user }) => {
       <Dropdown.Trigger className="sm:mr-3 rounded-full">
         <Avatar>
           <Avatar.Image alt={user?.name} src={user?.image} />
-          <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
+          <Avatar.Fallback delayMs={600}>
+            {user?.name ? user.name.charAt(0).toUpperCase() : "U"}
+          </Avatar.Fallback>
         </Avatar>
       </Dropdown.Trigger>
 
@@ -18,7 +20,9 @@ const AvatarDropdown = ({ user }) => {
           <div className="flex items-center gap-2">
             <Avatar size="sm">
               <Avatar.Image alt={user?.name} src={user?.image} />
-              <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
+              <Avatar.Fallback delayMs={600}>
+                {user?.name ? user.name.charAt(0).toUpperCase() : "U"}
+              </Avatar.Fallback>
             </Avatar>
 
             <div className="flex flex-col gap-0">
@@ -29,17 +33,11 @@ const AvatarDropdown = ({ user }) => {
         </div>
 
         <Dropdown.Menu>
-          <Dropdown.Item>
-            <Link href={"/add-car"}>Add Car</Link>
-          </Dropdown.Item>
+          <Dropdown.Item href={"/add-car"}>Add Car</Dropdown.Item>
 
-          <Dropdown.Item>
-            <Link href={"/my-bookings"}>My Bookings</Link>
-          </Dropdown.Item>
+          <Dropdown.Item href={"/my-bookings"}>My Bookings</Dropdown.Item>
 
-          <Dropdown.Item>
-            <Link href={"/my-added-cars"}>My Added Cars</Link>
-          </Dropdown.Item>
+          <Dropdown.Item href={"/my-added-cars"}>My Added Cars</Dropdown.Item>
 
           <Dropdown.Item>
             <Button className="px-0 h-auto bg-transparent  flex w-full items-center justify-between gap-2">
