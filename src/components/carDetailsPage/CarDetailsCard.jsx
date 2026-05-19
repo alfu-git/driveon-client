@@ -35,16 +35,24 @@ const CarDetailsCard = ({ car }) => {
           className="flex flex-col gap-5"
         >
           {/* brand */}
-          <div className="flex items-center gap-3">
-            <Image
-              src={car.brandImage}
-              alt={car.brandName}
-              width={30}
-              height={30}
-              className="rounded-full"
-            />
-            <span className="text-sm dark:text-gray-400">{car.brandName}</span>
-          </div>
+          {car?.brandImage ? (
+            <div className="flex items-center gap-3">
+              <Image
+                src={car.brandImage}
+                alt={car.brandName}
+                width={30}
+                height={30}
+                className="rounded-full"
+              />
+              <span className="text-sm dark:text-gray-400">
+                {car.brandName}
+              </span>
+            </div>
+          ) : (
+            <span className="text-sm dark:text-gray-400">
+              Brand Not Mentioned
+            </span>
+          )}
 
           {/* name */}
           <h1 className="text-3xl md:text-4xl font-bold">{car.carName}</h1>
@@ -61,7 +69,7 @@ const CarDetailsCard = ({ car }) => {
           {/* quick info */}
           <div className="flex flex-wrap gap-4 text-sm dark:text-gray-300">
             <span className="flex items-center gap-2">
-              <FaCar /> {car.carType}
+              <FaCar /> {car.carType ? car.carType : "Type Not Mentioned"}
             </span>
 
             <span className="flex items-center gap-2">
@@ -106,7 +114,7 @@ const CarDetailsCard = ({ car }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="lg:max-w-140 xl:max-w-190 p-6 rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl"
+          className="lg:w-2/3 p-6 rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl"
         >
           <h2 className="text-xl font-semibold mb-3">Description</h2>
 
@@ -121,7 +129,7 @@ const CarDetailsCard = ({ car }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-          className="lg:w-full p-6 rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl"
+          className="lg:w-1/3 p-6 rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl"
         >
           <h2 className="text-xl font-semibold mb-4">Specifications</h2>
 
@@ -133,7 +141,7 @@ const CarDetailsCard = ({ car }) => {
 
             <p className="flex justify-between">
               <span>Type</span>
-              <span>{car.carType}</span>
+              <span>{car.carType ? car.carType : "Type Not Mentioned"}</span>
             </p>
 
             <p className="flex justify-between">

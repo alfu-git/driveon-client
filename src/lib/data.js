@@ -9,3 +9,9 @@ export const getCarById = async (carId) => {
   const data = await res.json();
   return data;
 };
+
+export const getCarByUserId = async (userId) => {
+  const res = await fetch(`http://localhost:5000/added-cars/${userId}`);
+  const data = await res.json();
+  return data;
+};
