@@ -1,5 +1,5 @@
-export const getAllCars = async () => {
-  const res = await fetch("http://localhost:5000/cars");
+export const getAllCars = async (searchValue = "") => {
+  const res = await fetch(`http://localhost:5000/cars?search=${searchValue}`, {cache: "no-store"});
   const data = await res.json();
   return data;
 };
