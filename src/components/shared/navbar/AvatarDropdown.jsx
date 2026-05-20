@@ -71,7 +71,7 @@ const AvatarDropdown = ({ user }) => {
           <Dropdown.Item>
             <Button
               onClick={handleLogOut}
-              className="px-0 h-auto bg-transparent  flex w-full items-center justify-between gap-2"
+              className="px-0 h-auto bg-transparent text-[#020909]! dark:text-[#FAFAFA]! flex w-full items-center justify-between gap-2"
             >
               <label>Log Out</label>
               <ArrowRightFromSquare className="size-3.5 text-primary" />
