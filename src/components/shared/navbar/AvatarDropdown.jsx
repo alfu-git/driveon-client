@@ -16,7 +16,7 @@ const AvatarDropdown = ({ user }) => {
 
   return (
     <Dropdown>
-      <Dropdown.Trigger className="mt-1 mr-1 sm:mr-3 lg:mr-5 flex gap-1 items-center">
+      <Dropdown.Trigger className="mr-1 sm:mr-3 lg:mr-6 flex gap-1 lg:gap-2 items-center">
         <ChevronDown className="text-zinc-400" />
 
         <motion.div
