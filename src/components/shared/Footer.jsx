@@ -12,7 +12,7 @@ import { IoCallSharp } from "react-icons/io5";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#020909] dark:bg-white/5 dark:backdrop-blur-md dark:shadow-2xl text-[#020909] dark:text-zinc-300 border-t border-white/10 mt-20">
+    <footer className="w-full bg-[#020909] dark:bg-white/5 dark:backdrop-blur-md dark:shadow-2xl text-[#020909] dark:text-zinc-300 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* about + contact */}
         <div>
@@ -56,7 +56,10 @@ const Footer = () => {
 
           <ul className="space-y-2 text-sm">
             <li>
-              <Link href="/" className="text-zinc-300 hover:text-white transition">
+              <Link
+                href="/"
+                className="text-zinc-300 hover:text-white transition"
+              >
                 Home
               </Link>
             </li>
@@ -71,13 +74,19 @@ const Footer = () => {
             </li>
 
             <li>
-              <Link href="/add-cars" className="text-zinc-300 hover:text-white transition">
+              <Link
+                href="/add-cars"
+                className="text-zinc-300 hover:text-white transition"
+              >
                 Add Cars
               </Link>
             </li>
 
             <li>
-              <Link href="/my-bookings" className="text-zinc-300 hover:text-white transition">
+              <Link
+                href="/my-bookings"
+                className="text-zinc-300 hover:text-white transition"
+              >
                 My Bookings
               </Link>
             </li>
