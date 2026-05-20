@@ -49,9 +49,7 @@ const CarDetailsCard = ({ car }) => {
               </span>
             </div>
           ) : (
-            <span className="text-sm dark:text-gray-400">
-              Brand Not Mentioned
-            </span>
+            <span className="text-sm dark:text-gray-400">N/A</span>
           )}
 
           {/* name */}
@@ -69,7 +67,7 @@ const CarDetailsCard = ({ car }) => {
           {/* quick info */}
           <div className="flex flex-wrap gap-4 text-sm dark:text-gray-300">
             <span className="flex items-center gap-2">
-              <FaCar /> {car.carType ? car.carType : "Type Not Mentioned"}
+              <FaCar /> {car.carType ? car.carType : "N/A"}
             </span>
 
             <span className="flex items-center gap-2">

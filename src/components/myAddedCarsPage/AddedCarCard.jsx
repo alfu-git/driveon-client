@@ -5,14 +5,14 @@ import Image from "next/image";
 import { Button } from "@heroui/react";
 import { FaMapPin, FaEdit } from "react-icons/fa";
 import { TbArmchair } from "react-icons/tb";
-import { MdDelete } from "react-icons/md";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import AddedCarCardDeleteDialog from "./AddedCarCardDeleteDialog";
 
-const AddedCarCard = ({ car }) => {
+const AddedCarCard = ({ car, addedCarDeleteAction }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{
         duration: 0.9,
@@ -82,12 +82,10 @@ const AddedCarCard = ({ car }) => {
             </Button>
           </Link>
 
-          <Button
-            onClick={() => handleDelete(car._id)}
-            className="w-full flex items-center gap-2 bg-red-600 hover:bg-red-700"
-          >
-            <MdDelete /> Delete
-          </Button>
+          <AddedCarCardDeleteDialog
+            car={car}
+            addedCarDeleteAction={addedCarDeleteAction}
+          />
         </div>
       </div>
     </motion.div>

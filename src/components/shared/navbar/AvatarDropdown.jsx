@@ -4,6 +4,7 @@ import { Avatar, Button, Dropdown } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 const AvatarDropdown = ({ user }) => {
   const router = useRouter();
@@ -15,7 +16,9 @@ const AvatarDropdown = ({ user }) => {
 
   return (
     <Dropdown>
-      <Dropdown.Trigger className="mr-1 sm:mr-3 lg:mr-5 rounded-full">
+      <Dropdown.Trigger className="mt-1 mr-1 sm:mr-3 lg:mr-5 flex gap-1 items-center">
+        <ChevronDown className="text-zinc-400" />
+
         <motion.div
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 1 }}

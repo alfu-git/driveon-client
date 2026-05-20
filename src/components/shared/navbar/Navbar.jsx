@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, Button } from "@heroui/react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { VscMenu } from "react-icons/vsc";
 import Image from "next/image";
 import { X } from "lucide-react";
@@ -10,13 +10,13 @@ import ThemeToggleButton from "../ThemeToggleButton";
 import { authClient } from "@/lib/auth-client";
 import AvatarDropdown from "./AvatarDropdown";
 import Spinner from "../Spinner";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,11 +101,18 @@ const Navbar = () => {
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
-              <span className="block py-0.5 px-1 hover:bg-[#B81D23] rounded-md text-[#020909]! dark:text-[#FAFAFA]! hover:text-[#FAFAFA]! transition-colors duration-300">
+              <span
+                className={`block py-0.5 px-1 hover:bg-[#B81D23] rounded-md hover:text-[#FAFAFA]! transition-colors duration-200
+                  ${isSticky ? "text-[#FAFAFA]!" : "text-[#020909]! dark:text-[#FAFAFA]!"}
+                  `}
+              >
                 <X />
               </span>
             ) : (
-              <span className="block py-1 px-2 hover:bg-[#B81D23] rounded-md text-[#020909]! dark:text-[#FAFAFA]! hover:text-[#FAFAFA]! transition-colors duration-300">
+              <span
+                className={`block py-1 px-2 hover:bg-[#B81D23] rounded-md hover:text-[#FAFAFA]! transition-colors duration-200 
+                ${isSticky ? "text-[#FAFAFA]!" : "text-[#020909]! dark:text-[#FAFAFA]!"} `}
+              >
                 <VscMenu />
               </span>
             )}
@@ -117,7 +124,7 @@ const Navbar = () => {
               alt="DriveOn Logo"
               width={130}
               height={130}
-              className="cursor-pointer"
+              className="w-25 sm:w-30 h-auto cursor-pointer"
               priority
             />
           </Link>
@@ -156,11 +163,29 @@ const Navbar = () => {
         </div>
       </header>
 
-      {isMenuOpen && (
-        <div className="border-t border-separator lg:hidden">
-          <ul className="flex flex-col gap-2 p-4">{navLinks}</ul>
-        </div>
-      )}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: -40, filter: "blur(10px)" }}
+            animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, x: -40, filter: "blur(10px)" }}
+            transition={{
+              duration: 0.35,
+              ease: [0.4, 0, 0.2, 1],
+            }}
+            className="absolute top-full left-0 w-full lg:hidden z-50"
+          >
+            <div className="mx-4 mt-3 max-w-fit rounded-2xl border border-white/10 bg-white! dark:bg-[#020909]!  backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+              <ul
+                onClick={() => setIsMenuOpen(false)}
+                className="flex flex-col gap-3 p-4"
+              >
+                {navLinks}
+              </ul>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

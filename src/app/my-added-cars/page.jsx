@@ -1,5 +1,6 @@
 import AddedCarCard from "@/components/myAddedCarsPage/AddedCarCard";
 import AddedCarsPageEmptyState from "@/components/myAddedCarsPage/AddedCarsPageEmptyState";
+import { addedCarDeleteAction } from "@/lib/actions";
 import { auth } from "@/lib/auth";
 import { getCarByUserId } from "@/lib/data";
 import { headers } from "next/headers";
@@ -28,7 +29,7 @@ const MyAddedCarsPage = async () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
               {userCars.map((car) => (
-                <AddedCarCard key={car._id} car={car} />
+                <AddedCarCard key={car._id} car={car} addedCarDeleteAction={addedCarDeleteAction} />
               ))}
             </div>
           </div>

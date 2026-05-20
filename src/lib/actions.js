@@ -82,3 +82,24 @@ export const carEditAction = async (carId, formData) => {
 
   return result;
 };
+
+export const addedCarDeleteAction = async (carId) => {
+  "use server";
+
+  const res = await fetch(`http://localhost:5000/added-cars/${carId}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to delete car data");
+  }
+
+  const result = await res.json();
+
+  if (result?.deletedCount > 0) {
+    revalidatePath("/cars");
+    revalidatePath("/my-added-cars");
+  }
+
+  return result;
+};

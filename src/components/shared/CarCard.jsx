@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 const CarCard = ({ car }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{
         duration: 0.9,
@@ -57,7 +57,7 @@ const CarCard = ({ car }) => {
             <p className="text-xs text-gray-400">{car.brandName}</p>
           </div>
         ) : (
-          <p className="text-xs text-gray-400">Brand Not Mentioned</p>
+          <p className="text-xs text-gray-400">N/A</p>
         )}
 
         <h3 className="text-2xl font-semibold">{car.carName}</h3>
@@ -65,25 +65,30 @@ const CarCard = ({ car }) => {
         <div className="flex items-center justify-between">
           <div className="flex items-baseline">
             <span className="text-2xl font-bold">${car.dailyRentPrice}</span>
+
             <span className="text-sm ">/day</span>
           </div>
+
           <span className="text-sm">{car.category}</span>
         </div>
 
         <div className="flex items-center justify-between text-sm">
           <span className="flex gap-2 items-center">
             <FaCar className="text-primary" />
-            <span>{car.carType ? car.carType : "Type Not Mentioned"}</span>
+
+            <span>{car.carType ? car.carType : "N/A"}</span>
           </span>
 
           <span className="flex gap-2 items-center">
             <TbArmchair className="text-primary" />
+
             <span>{car.seatCapacity} Seats</span>
           </span>
         </div>
 
         <p className="text-sm flex gap-2 items-center">
           <FaMapPin className="text-primary" />
+
           <span>{car.pickupLocation}</span>
         </p>
 
