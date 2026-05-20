@@ -110,12 +110,15 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
                   <Dropdown.Item id="SUV">
                     <Label>SUV</Label>
                   </Dropdown.Item>
+
                   <Dropdown.Item id="Sedan">
                     <Label>Sedan</Label>
                   </Dropdown.Item>
+
                   <Dropdown.Item id="Hatchback">
                     <Label>Hatchback</Label>
                   </Dropdown.Item>
+                  
                   <Dropdown.Item id="Luxury">
                     <Label>Luxury</Label>
                   </Dropdown.Item>

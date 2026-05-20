@@ -1,12 +1,13 @@
 "use client";
+
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Button } from "@heroui/react";
 import { FaCar, FaMapPin } from "react-icons/fa";
 import { TbArmchair } from "react-icons/tb";
+import CarBookingModal from "./CarBookingModal";
 
-const CarDetailsCard = ({ car }) => {
+const CarDetailsCard = ({ car, bookingsAddAction }) => {
   return (
     <div className="min-h-screen px-4 md:px-10">
       <div className="flex flex-col lg:flex-row gap-10 lg:items-center">
@@ -91,16 +92,7 @@ const CarDetailsCard = ({ car }) => {
           </span>
 
           {/* booking */}
-          <Button
-            isDisabled={!car.availabilityStatus}
-            className={`mt-4 w-fit px-6 ${
-              car.availabilityStatus
-                ? "bg-[#B81D23] hover:bg-[#a1161b]"
-                : "bg-gray-600 cursor-not-allowed"
-            }`}
-          >
-            {car.availabilityStatus ? "Book Now" : "Not Available"}
-          </Button>
+          <CarBookingModal car={car} bookingsAddAction={bookingsAddAction} />
         </motion.div>
       </div>
 

@@ -10,13 +10,16 @@ const AddedCarCardDeleteDialog = ({ car, addedCarDeleteAction }) => {
   const handleAddedCarDelete = async (carId) => {
     try {
       const result = await addedCarDeleteAction(carId);
+      console.log(result);
+      console.log("car: ", car)
 
       if (result.deletedCount > 0) {
-        toast.warning(`${car.carName} remove from your garage`);
+        toast.success(`${car.carName} remove from your garage`);
       } else {
         toast.error("Delete failed!");
       }
     } catch (err) {
+      console.log(err);
       toast.error("Something went wrong!");
     }
   };

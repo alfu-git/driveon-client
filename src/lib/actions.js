@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { auth } from "./auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getCarById } from "./data";
 
 export const carAddAction = async (formData) => {
   "use server";
@@ -99,6 +100,52 @@ export const addedCarDeleteAction = async (carId) => {
   if (result?.deletedCount > 0) {
     revalidatePath("/cars");
     revalidatePath("/my-added-cars");
+  }
+
+  return result;
+};
+
+export const bookingsAddAction = async (data) => {
+  "use server";
+
+  const session = await auth.api.getSession({ headers: await headers() });
+  const user = session?.user;
+
+  const car = await getCarById(data?.carId);
+
+  const bookingData = {
+    userId: user?.id,
+    userName: user?.name,
+    carName: car?.carName,
+    carImage: car?.carImage,
+    category: car?.category,
+    dailyRentPrice: Number(car?.dailyRentPrice),
+    seatCapacity: Number(car?.seatCapacity),
+    pickupLocation: car?.pickupLocation,
+    availabilityStatus: car?.availabilityStatus,
+    description: car?.description,
+    bookingDate: new Date(),
+    driverNeeded: data?.driverNeeded?.toLowerCase() === "yes",
+    specialNote: data?.note,
+  };
+
+  const res = await fetch("http://localhost:5000/user-bookings", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bookingData),
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to booking car");
+  }
+
+  const result = await res.json();
+
+  if (result?.insertedId) {
+    revalidatePath("/my-bookings");
+    redirect("/my-bookings");
   }
 
   return result;

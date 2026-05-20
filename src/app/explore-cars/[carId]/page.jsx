@@ -1,4 +1,5 @@
 import CarDetailsCard from "@/components/carDetailsPage/CarDetailsCard";
+import { bookingsAddAction } from "@/lib/actions";
 import { getCarById } from "@/lib/data";
 import React from "react";
 
@@ -25,7 +26,7 @@ const CarDetailsPage = async ({ params }) => {
           <h2 className="mb-10 text-3xl font-bold">Pick Your Ride</h2>
 
           <div>
-            <CarDetailsCard car={car} />
+            <CarDetailsCard car={car} bookingsAddAction={bookingsAddAction} />
           </div>
         </div>
       </div>

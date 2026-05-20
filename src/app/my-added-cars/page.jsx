@@ -25,7 +25,7 @@ const MyAddedCarsPage = async () => {
       <div>
         {userCars.length > 0 ? (
           <div>
-            <h2 className="mb-7.5 text-3xl font-bold">Your Garage</h2>
+            <h2 className="mb-10 text-3xl font-bold">Your Garage</h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
               {userCars.map((car) => (

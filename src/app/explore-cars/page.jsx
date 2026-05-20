@@ -12,7 +12,7 @@ const ExploreCarsPage = async () => {
           <h2 className="mb-7.5 text-3xl font-bold">Find your perfect ride</h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
-            {cars.map((car) => (
+            {cars?.map((car) => (
               <CarCard key={car._id} car={car} />
             ))}
           </div>
