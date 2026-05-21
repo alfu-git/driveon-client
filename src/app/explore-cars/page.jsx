@@ -30,7 +30,7 @@ const ExploreCarsPage = async ({ searchParams }) => {
               ))}
             </div>
           ) : (
-            <EmptyCarsState searchValue={searchValue} />
+            <EmptyCarsState searchValue={searchValue} carType={carType} />
           )}
         </div>
       </div>

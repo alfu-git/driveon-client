@@ -80,6 +80,16 @@ const CarDetailsCard = ({ car, bookingsAddAction }) => {
             </span>
           </div>
 
+          {/* booking count */}
+          <span className="mt-2 flex items-center gap-2">
+            <span className="font-medium">Bookings:</span>
+            <span
+              className={`font-semibold ${car?.bookingCount > 0 ? "text-green-600" : "text-red-600"}`}
+            >
+              {car?.bookingCount}
+            </span>
+          </span>
+
           {/* availability */}
           <span
             className={`w-fit px-4 py-1 rounded-full text-sm font-medium ${

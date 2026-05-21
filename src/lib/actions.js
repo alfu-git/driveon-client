@@ -25,6 +25,7 @@ export const carAddAction = async (formData) => {
     pickupLocation: carData?.pickupLocation,
     description: carData?.description,
     availabilityStatus: carData?.availability === "Available",
+    bookingCount: 0,
   };
 
   const res = await fetch("http://localhost:5000/added-cars", {

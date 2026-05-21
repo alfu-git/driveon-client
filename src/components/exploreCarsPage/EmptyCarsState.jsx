@@ -4,7 +4,20 @@ import React from "react";
 import { motion } from "framer-motion";
 import { SearchX, Car } from "lucide-react";
 
-const EmptyCarsState = ({ searchValue }) => {
+const EmptyCarsState = ({ searchValue, carType }) => {
+  const hasSearch = searchValue?.trim()?.length > 0;
+  const hasFilter = carType?.trim()?.length > 0;
+
+  let message = "No cars available at the moment";
+
+  if (hasSearch && hasFilter) {
+    message = `We couldn’t find any ${carType} cars matching "${searchValue}"`;
+  } else if (hasSearch) {
+    message = `We couldn’t find any cars matching "${searchValue}"`;
+  } else if (hasFilter) {
+    message = `No ${carType} cars available right now`;
+  }
+
   return (
     <div className="w-full flex items-center justify-center py-10 md:py-15">
       <motion.div
@@ -29,14 +42,11 @@ const EmptyCarsState = ({ searchValue }) => {
           </div>
         </motion.div>
 
-        {/* text */}
+        {/* title */}
         <h3 className="text-2xl font-bold text-white mb-2">No cars found</h3>
 
-        <p className="text-white/60 text-sm mb-6">
-          {searchValue
-            ? `We couldn’t find any cars matching "${searchValue}"`
-            : "No cars available at the moment"}
-        </p>
+        {/* dynamic text */}
+        <p className="text-white/60 text-sm mb-6">{message}</p>
 
         {/* hint */}
         <div className="flex items-center justify-center gap-2 text-white/40 text-xs">
