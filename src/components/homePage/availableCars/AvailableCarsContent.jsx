@@ -17,6 +17,7 @@ const AvailableCarsContent = ({ limitedCars }) => {
           viewport={{ once: true, amount: 0.3 }}
         >
           <h2 className="text-4xl text-primary font-bold">Available Cars</h2>
+          
           <p>Choose your perfect ride from our collection</p>
         </motion.div>
 

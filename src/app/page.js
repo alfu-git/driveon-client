@@ -1,5 +1,6 @@
 import AvailableCars from "@/components/homePage/availableCars/AvailableCars";
 import Banner from "@/components/homePage/Banner";
+import OurServices from "@/components/homePage/OurServices";
 import Stats from "@/components/homePage/stats/Stats";
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       <Banner />
       <AvailableCars />
       <Stats />
+      <OurServices />
     </>
   );
 }
