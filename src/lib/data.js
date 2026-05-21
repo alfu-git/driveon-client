@@ -5,10 +5,9 @@ import { auth } from "./auth";
 export const getAllCars = async (
   searchValue = "",
   carType = "",
-  userId = "",
 ) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/cars?search=${searchValue}&carType=${carType}&userId=${userId}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/cars?search=${searchValue}&carType=${carType}`,
     { cache: "no-store" },
   );
   const data = await res.json();

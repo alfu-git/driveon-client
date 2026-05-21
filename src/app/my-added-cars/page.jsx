@@ -1,5 +1,5 @@
 import AddedCarCard from "@/components/myAddedCarsPage/AddedCarCard";
-import AddedCarsPageEmptyState from "@/components/myAddedCarsPage/AddedCarsPageEmptyState";
+import CarsEmptyState from "@/components/shared/CarsEmptyState";
 import { addedCarDeleteAction } from "@/lib/actions";
 import { auth } from "@/lib/auth";
 import { getCarByUserId } from "@/lib/data";
@@ -38,7 +38,7 @@ const MyAddedCarsPage = async () => {
             </div>
           </div>
         ) : (
-          <AddedCarsPageEmptyState />
+          <CarsEmptyState title={"No Cars Added Yet"} description={"Looks like your garage is empty. Start adding your cars and manage them easily from here"} buttonLink={"/add-car"} buttonText={"Add Your First Car"} />
         )}
       </div>
     </section>

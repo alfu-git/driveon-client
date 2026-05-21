@@ -6,7 +6,7 @@ import { FaCar } from "react-icons/fa";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 
-const AddedCarsPageEmptyState = () => {
+const CarsEmptyState = ({ title, description, buttonLink, buttonText }) => {
   return (
     <div className="w-full flex flex-col items-center justify-center  text-center">
       {/* icon */}
@@ -19,14 +19,14 @@ const AddedCarsPageEmptyState = () => {
         <FaCar />
       </motion.div>
 
-      {/* text */}
+      {/* title */}
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
         className="text-2xl font-semibold mb-2"
       >
-        No Cars Added Yet
+        {title}
       </motion.h2>
 
       {/* description */}
@@ -36,8 +36,7 @@ const AddedCarsPageEmptyState = () => {
         transition={{ delay: 0.3 }}
         className="text-sm max-w-md mb-6"
       >
-        Looks like your garage is empty. Start adding your cars and manage them
-        easily from here
+        {description}
       </motion.p>
 
       {/* button */}
@@ -46,14 +45,12 @@ const AddedCarsPageEmptyState = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
       >
-        <Link href="/add-car">
-          <Button className="bg-primary  font-medium px-6">
-            Add Your First Car
-          </Button>
+        <Link href={buttonLink}>
+          <Button className="bg-primary  font-medium px-6">{buttonText}</Button>
         </Link>
       </motion.div>
     </div>
   );
 };
 
-export default AddedCarsPageEmptyState;
+export default CarsEmptyState;

@@ -1,4 +1,5 @@
 import UserBookingsCarCard from "@/components/myBookingsPage/UserBookingCard";
+import CarsEmptyState from "@/components/shared/CarsEmptyState";
 import { auth } from "@/lib/auth";
 import { getBookingsDataByUserId } from "@/lib/data";
 import { headers } from "next/headers";
@@ -21,15 +22,26 @@ const MyBookingsPage = async () => {
   return (
     <section className="my-15 sm:my-20 max-w-7xl mx-auto w-full px-5">
       <div>
-        <div>
-          <h2 className="mb-7.5 text-3xl font-bold">Drive History</h2>
+        {userBookings.length > 0 ? (
+          <div>
+            <h2 className="mb-7.5 text-3xl font-bold">Drive History</h2>
 
-          <div className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-6">
-            {userBookings.map((booking) => (
-              <UserBookingsCarCard key={booking?._id} booking={booking} />
-            ))}
+            <div className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-6">
+              {userBookings.map((booking) => (
+                <UserBookingsCarCard key={booking?._id} booking={booking} />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <CarsEmptyState
+            title={"No Drive History Available"}
+            description={
+              "You haven’t taken any rides yet. Start exploring cars and book your first drive with ease."
+            }
+            buttonLink={"/explore-cars"}
+            buttonText={"Start Your First Rides"}
+          />
+        )}
       </div>
     </section>
   );
