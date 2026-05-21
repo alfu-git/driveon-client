@@ -2,7 +2,10 @@ import EmptyCarsState from "@/components/exploreCarsPage/EmptyCarsState";
 import FilterBar from "@/components/exploreCarsPage/FilterBar";
 import SearchBar from "@/components/exploreCarsPage/SearchBar";
 import CarCard from "@/components/shared/CarCard";
+import { auth } from "@/lib/auth";
+import { authClient } from "@/lib/auth-client";
 import { getAllCars } from "@/lib/data";
+import { headers } from "next/headers";
 import React from "react";
 
 export const metadata = {
@@ -16,13 +19,21 @@ const ExploreCarsPage = async ({ searchParams }) => {
   const searchValue = params?.search || "";
   const carType = params?.carType || "";
 
-  const cars = await getAllCars(searchValue, carType);
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  const userId = session.user?.id || "";
+  console.log(userId);
+
+  const cars = await getAllCars(searchValue, carType, userId);
 
   return (
     <section className="my-15 sm:my-20 max-w-7xl mx-auto w-full px-5">
       <div>
         <div>
-          <h2 className="mb-10 sm:mb-15 text-3xl font-bold">Find your perfect ride</h2>
+          <h2 className="mb-10 sm:mb-15 text-3xl font-bold">
+            Find your perfect ride
+          </h2>
 
           <div className="mb-10 flex flex-col sm:flex-row gap-y-5 gap-x-6 sm:justify-between">
             <SearchBar />

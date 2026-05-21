@@ -2,9 +2,13 @@ import { headers } from "next/headers";
 import { auth } from "./auth";
 
 // data fetching
-export const getAllCars = async (searchValue = "", carType = "") => {
+export const getAllCars = async (
+  searchValue = "",
+  carType = "",
+  userId = "",
+) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/cars?search=${searchValue}&carType=${carType}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/cars?search=${searchValue}&carType=${carType}&userId=${userId}`,
     { cache: "no-store" },
   );
   const data = await res.json();
