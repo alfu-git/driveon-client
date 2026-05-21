@@ -10,7 +10,7 @@ const AvailableCarsContent = ({ limitedCars }) => {
       <div>
         {/* header */}
         <motion.div
-          className="mb-15 flex flex-col gap-4 justify-center items-center"
+          className="mb-15 flex flex-col gap-4 justify-center items-center text-center"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
