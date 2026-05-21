@@ -1,12 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import {
-  FaFacebookF,
-  FaGithub,
-  FaLinkedin,
-  FaMapPin,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaFacebookF, FaGithub, FaLinkedin, FaMapPin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { IoIosMail } from "react-icons/io";
 import { IoCallSharp } from "react-icons/io5";
 
@@ -102,7 +97,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Social Icons */}
+        {/* social icons */}
         <div>
           <h6 className="text-xl text-[#FAFAFA] font-bold mb-4">Follow Us</h6>
 
@@ -120,7 +115,7 @@ const Footer = () => {
               target="_blank"
               className="p-2 rounded-full bg-white/1"
             >
-              <FaTwitter className="text-primary" />
+              <FaXTwitter className="text-primary" />
             </Link>
 
             <Link

@@ -7,6 +7,10 @@ import { getCarById } from "./data";
 export const carAddAction = async (formData) => {
   "use server";
 
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -32,6 +36,7 @@ export const carAddAction = async (formData) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(addedCarData),
   });
@@ -53,6 +58,10 @@ export const carAddAction = async (formData) => {
 export const carEditAction = async (carId, formData) => {
   "use server";
 
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
   const carData = Object.fromEntries(formData.entries());
 
   const updatedCarData = {
@@ -67,6 +76,7 @@ export const carEditAction = async (carId, formData) => {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(updatedCarData),
   });
@@ -88,8 +98,15 @@ export const carEditAction = async (carId, formData) => {
 export const addedCarDeleteAction = async (carId) => {
   "use server";
 
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
   const res = await fetch(`http://localhost:5000/added-cars/${carId}`, {
     method: "DELETE",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
   });
 
   if (!res.ok) {
@@ -108,6 +125,10 @@ export const addedCarDeleteAction = async (carId) => {
 
 export const bookingsAddAction = async (data) => {
   "use server";
+
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
 
   const session = await auth.api.getSession({ headers: await headers() });
   const user = session?.user;
@@ -134,6 +155,7 @@ export const bookingsAddAction = async (data) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(bookingData),
   });
