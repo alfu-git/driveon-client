@@ -32,9 +32,12 @@ const AvatarDropdown = ({ user }) => {
         >
           {/* animated glow */}
           <div className="absolute inset-0 rounded-full bg-primary blur-sm animate-pulseGlow" />
-
           <Avatar className="relative z-10 cursor-pointer transition-transform duration-300">
-            <Avatar.Image alt={user?.name} src={user?.image} />
+            <Avatar.Image
+              referrerPolicy="no-referrer"
+              alt={user?.name}
+              src={user?.image}
+            />
 
             <Avatar.Fallback>
               {user?.name ? user.name.charAt(0).toUpperCase() : "U"}

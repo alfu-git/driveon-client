@@ -122,7 +122,7 @@ const CarBookingModal = ({ car, bookingsAddAction }) => {
                     type="submit"
                     className="w-full bg-[#B81D23] hover:bg-[#a1161b] mt-2"
                   >
-                    Confirm Booking
+                    Book Now
                   </Button>
                 </form>
               </Surface>

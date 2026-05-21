@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🚗 DriveOn
 
-## Getting Started
+📝 DriveOn is a modern full-stack car rental platform designed to make vehicle renting simple, fast, and seamless. Users can explore available cars, view detailed information, and rent vehicles with ease. The platform also allows users to manage their bookings and perform full CRUD operations on car listings.
 
-First, run the development server:
+The system is built with secure authentication, JWT-based route protection, and a robust booking management system. It features a fully responsive and modern UI for an optimized user experience across all devices.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌍 Live Demo
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+🚀 Visit the live site: https://driveon-client.vercel.app
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ✨ Key Features
 
-To learn more about Next.js, take a look at the following resources:
+- 🔐 **Secure Authentication System**  
+  Seamless login and signup with protected routes powered by JWT-based authentication.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 🚗 **Explore & Discover Cars**  
+  Browse a wide range of available cars with detailed information, images, and pricing.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 📅 **Smart Booking System**  
+  Rent cars instantly with a smooth booking flow and real-time availability management.
 
-## Deploy on Vercel
+- ➕ **Full Car Management (CRUD)**  
+  Add, update, and delete car listings with a simple and intuitive interface.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ⚡ **Modern & Responsive UI**  
+  Fully responsive design with a clean, modern, and smooth user experience across all devices.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🛠️ Tech Stack
+
+### 💻 Frontend
+- Next.js (App Router)
+- React.js
+- Tailwind CSS
+- HeroUI
+
+### 🎬 Animations & UI Enhancements
+- Framer Motion (smooth animations & transitions)
+
+### 🔐 Authentication
+- BetterAuth (JWT-based secure authentication)
+
+### 💾 Backend
+- Express.js
+- Node.js
+
+### 🗄️ Database
+- MongoDB
+
+### 🔔 Notifications
+- react-hot-toast (clean and modern toast notifications)
+
+---
+
+## 👨‍💻 Developer
+
+**MD Alfaz**  
+
+- GitHub: https://github.com/alfu-git  
+- LinkedIn: https://www.linkedin.com/in/md-alfaz-dev7  
+
+---
+
+⭐ If you like this project, give it a star!

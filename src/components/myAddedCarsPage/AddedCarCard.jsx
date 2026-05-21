@@ -82,7 +82,7 @@ const AddedCarCard = ({ car, addedCarDeleteAction }) => {
         <div className="flex gap-5 mt-3">
           <Link href={`/my-added-cars/${car._id}`} className="w-full">
             <Button className="w-full flex items-center gap-2 bg-blue-600 hover:bg-blue-700">
-              <FaEdit /> Edit
+              <FaEdit /> Update
             </Button>
           </Link>
 

@@ -16,6 +16,10 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+  console.log(user);
+
   const pathname = usePathname();
 
   useEffect(() => {
@@ -81,8 +85,6 @@ const Navbar = () => {
     </>
   );
 
-  const { data: session, isPending } = authClient.useSession();
-  const user = session?.user;
 
   return (
     <nav
