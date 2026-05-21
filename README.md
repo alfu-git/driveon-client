@@ -34,16 +34,15 @@ The system is built with secure authentication, JWT-based route protection, and 
 ## 🛠️ Tech Stack
 
 ### 💻 Frontend
-- Next.js (App Router)
-- React.js
+- Next.js
 - Tailwind CSS
 - HeroUI
 
 ### 🎬 Animations & UI Enhancements
-- Framer Motion (smooth animations & transitions)
+- Framer Motion
 
 ### 🔐 Authentication
-- BetterAuth (JWT-based secure authentication)
+- BetterAuth
 
 ### 💾 Backend
 - Express.js
@@ -53,7 +52,7 @@ The system is built with secure authentication, JWT-based route protection, and 
 - MongoDB
 
 ### 🔔 Notifications
-- react-hot-toast (clean and modern toast notifications)
+- react-hot-toast
 
 ---
 
