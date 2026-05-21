@@ -5,6 +5,12 @@ import CarCard from "@/components/shared/CarCard";
 import { getAllCars } from "@/lib/data";
 import React from "react";
 
+export const metadata = {
+  title: "Explore Cars | DriveOn",
+  description:
+    "Browse and explore a wide range of rental cars on DriveOn. Find SUVs, sedans, luxury cars, and budget-friendly options for your next trip.",
+};
+
 const ExploreCarsPage = async ({ searchParams }) => {
   const params = await searchParams;
   const searchValue = params?.search || "";
@@ -13,10 +19,10 @@ const ExploreCarsPage = async ({ searchParams }) => {
   const cars = await getAllCars(searchValue, carType);
 
   return (
-    <section className="my-20 max-w-7xl mx-auto w-full px-5">
+    <section className="my-15 sm:my-20 max-w-7xl mx-auto w-full px-5">
       <div>
         <div>
-          <h2 className="mb-15 text-3xl font-bold">Find your perfect ride</h2>
+          <h2 className="mb-10 sm:mb-15 text-3xl font-bold">Find your perfect ride</h2>
 
           <div className="mb-10 flex flex-col sm:flex-row gap-y-5 gap-x-6 sm:justify-between">
             <SearchBar />

@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { FaMapMarkerAlt, FaUserTie } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { CgCalendarDates } from "react-icons/cg";
 
 const UserBookingCard = ({ booking }) => {
   const {
@@ -56,7 +57,10 @@ const UserBookingCard = ({ booking }) => {
         <div className="flex items-center justify-between text-sm dark:text-gray-300">
           <p className="font-medium dark:text-white">${dailyRentPrice} / day</p>
 
-          <p>📅 {formattedDate.toLocaleDateString()}</p>
+          <p className="flex items-center gap-2">
+            <CgCalendarDates className="text-primary text-base" />{" "}
+            {formattedDate.toLocaleDateString()}
+          </p>
         </div>
 
         {/* location */}

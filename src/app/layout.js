@@ -16,7 +16,7 @@ const manrope = Manrope({
 });
 
 export const metadata = {
-  title: "DriveOn | Home",
+  title: "DriveOn - Rent Your Perfect Ride",
   description:
     "A modern car rental app where users can explore available cars, view car details, rent vehicles, manage their bookings, and maintain profiles. Users can add, update, and delete car listings. The system include with secure authentication, JWT protection, booking management, and responsive modern UI",
 };
@@ -28,10 +28,10 @@ export default function RootLayout({ children }) {
       className={`${orbitron.variable} ${manrope.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-[#FAFAFA] dark:bg-[#020909] text-[#020909] dark:text-[#FAFAFA]">
+      <body className="min-h-screen flex flex-col bg-[#FAFAFA] dark:bg-[#020909] text-[#020909] dark:text-[#FAFAFA]">
         <ThemeProviderWrapper>
           <Navbar />
-          <main>{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
           <Toaster />
         </ThemeProviderWrapper>

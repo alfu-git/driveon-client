@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const AddCarPageContent = ({ carAddAction }) => {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen overflow-hidden">
       {/* form */}
       <motion.div
         className="w-full lg:w-1/2"

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { Envelope } from "@gravity-ui/icons";
 import {
   Button,
   Dropdown,
@@ -12,6 +11,7 @@ import {
   TextField,
 } from "@heroui/react";
 import { ChevronDown } from "lucide-react";
+import { MdOutlineAddBox } from "react-icons/md";
 
 const CarBookingModal = ({ car, bookingsAddAction }) => {
   const [note, setNote] = useState("");
@@ -64,7 +64,7 @@ const CarBookingModal = ({ car, bookingsAddAction }) => {
 
             <Modal.Header>
               <Modal.Icon className="bg-[#B81D23]/20 text-[#B81D23]">
-                <Envelope className="size-5" />
+                <MdOutlineAddBox className="size-5" />
               </Modal.Icon>
 
               <Modal.Heading>Book This Car</Modal.Heading>

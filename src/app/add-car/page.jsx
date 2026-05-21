@@ -2,6 +2,12 @@ import AddCarPageContent from "@/components/addCarPage/AddCarPageContent";
 import { carAddAction } from "@/lib/actions";
 import React from "react";
 
+export const metadata = {
+  title: "Add New Car | DriveOn",
+  description:
+    "List your car on DriveOn and start earning by renting it to trusted users. Add car details, images, pricing and availability easily.",
+};
+
 const AddCarPage = async () => {
   return (
     <section className="pt-12">

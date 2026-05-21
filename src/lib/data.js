@@ -4,7 +4,7 @@ import { auth } from "./auth";
 // data fetching
 export const getAllCars = async (searchValue = "", carType = "") => {
   const res = await fetch(
-    `http://localhost:5000/cars?search=${searchValue}&carType=${carType}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/cars?search=${searchValue}&carType=${carType}`,
     { cache: "no-store" },
   );
   const data = await res.json();
@@ -16,11 +16,14 @@ export const getCarById = async (carId) => {
     headers: await headers(),
   });
 
-  const res = await fetch(`http://localhost:5000/cars/${carId}`, {
-    headers: {
-      authorization: `Bearer ${token}`,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/cars/${carId}`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
   const data = await res.json();
   return data;
 };
@@ -30,11 +33,14 @@ export const getCarByUserId = async (userId) => {
     headers: await headers(),
   });
 
-  const res = await fetch(`http://localhost:5000/added-cars/${userId}`, {
-    headers: {
-      authorization: `Bearer ${token}`,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/added-cars/${userId}`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
   const data = await res.json();
   return data;
 };
@@ -44,11 +50,14 @@ export const getBookingsDataByUserId = async (userId) => {
     headers: await headers(),
   });
 
-  const res = await fetch(`http://localhost:5000/user-bookings/${userId}`, {
-    headers: {
-      authorization: `Bearer ${token}`,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/user-bookings/${userId}`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
   const data = await res.json();
   return data;
 };

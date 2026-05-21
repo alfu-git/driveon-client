@@ -34,7 +34,7 @@ const CarCard = ({ car }) => {
       </div>
 
       {/* car image */}
-      <div className="relative w-full h-55 overflow-hidden">
+      <div className="relative w-full h-55 sm:h-65 md:h-55 overflow-hidden">
         <Image
           src={car.carImage}
           alt={car.carName}

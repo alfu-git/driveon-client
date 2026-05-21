@@ -4,6 +4,12 @@ import { getBookingsDataByUserId } from "@/lib/data";
 import { headers } from "next/headers";
 import React from "react";
 
+export const metadata = {
+  title: "My Bookings | DriveOn",
+  description:
+    "View and manage all your car bookings in one place. Track your reservations, check booking details, and stay organized with DriveOn.",
+};
+
 const MyBookingsPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),

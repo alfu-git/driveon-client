@@ -3,14 +3,20 @@ import { carEditAction } from "@/lib/actions";
 import { getCarById } from "@/lib/data";
 import React from "react";
 
-const CarUpdatePage = async ({params}) => {
-  const {carId} = await params;
+export const metadata = {
+  title: "Update Your Ride | DriveOn",
+  description:
+    "Modify your car listing easily on DriveOn. Update pricing, features, and availability to maximize your bookings.",
+};
+
+const CarUpdatePage = async ({ params }) => {
+  const { carId } = await params;
   const car = await getCarById(carId);
 
   const carEditActionWrapper = async (formData) => {
-    'use server'
+    "use server";
     return carEditAction(carId, formData);
-  }
+  };
 
   return (
     <section className="my-15 sm:my-20 max-w-7xl mx-auto w-full px-5">
@@ -19,7 +25,10 @@ const CarUpdatePage = async ({params}) => {
           <h2 className="mb-10 text-3xl font-bold">Update Your Ride</h2>
 
           <div>
-            <CarUpdateForm car={car} carEditActionWrapper={carEditActionWrapper} />
+            <CarUpdateForm
+              car={car}
+              carEditActionWrapper={carEditActionWrapper}
+            />
           </div>
         </div>
       </div>

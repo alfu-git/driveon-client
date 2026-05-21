@@ -32,7 +32,7 @@ export const carAddAction = async (formData) => {
     bookingCount: 0,
   };
 
-  const res = await fetch("http://localhost:5000/added-cars", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/added-cars`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -72,14 +72,17 @@ export const carEditAction = async (carId, formData) => {
     availabilityStatus: carData?.availability === "Available",
   };
 
-  const res = await fetch(`http://localhost:5000/added-cars/${carId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/added-cars/${carId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(updatedCarData),
     },
-    body: JSON.stringify(updatedCarData),
-  });
+  );
 
   if (!res.ok) {
     throw new Error("Failed to update car data");
@@ -102,12 +105,15 @@ export const addedCarDeleteAction = async (carId) => {
     headers: await headers(),
   });
 
-  const res = await fetch(`http://localhost:5000/added-cars/${carId}`, {
-    method: "DELETE",
-    headers: {
-      authorization: `Bearer ${token}`,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/added-cars/${carId}`,
+    {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   if (!res.ok) {
     throw new Error("Failed to delete car data");
@@ -151,14 +157,17 @@ export const bookingsAddAction = async (data) => {
     specialNote: data?.note,
   };
 
-  const res = await fetch("http://localhost:5000/user-bookings", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/user-bookings`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(bookingData),
     },
-    body: JSON.stringify(bookingData),
-  });
+  );
 
   if (!res.ok) {
     throw new Error("Failed to booking car");

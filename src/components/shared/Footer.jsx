@@ -1,13 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import { FaFacebookF, FaGithub, FaLinkedin, FaMapPin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoIosMail } from "react-icons/io";
 import { IoCallSharp } from "react-icons/io5";
+import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#020909] dark:bg-white/5 dark:backdrop-blur-md dark:shadow-2xl text-[#020909] dark:text-zinc-300 border-t border-white/10">
+    <motion.footer
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: [0.25, 0.8, 0.25, 1] }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="w-full bg-[#020909] dark:bg-white/5 dark:backdrop-blur-md dark:shadow-2xl text-[#020909] dark:text-zinc-300 border-t border-white/10"
+    >
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* about + contact */}
         <div>
@@ -20,25 +29,24 @@ const Footer = () => {
 
           <div className="mt-5 space-y-2 text-sm">
             <div className="flex gap-1 items-center">
-              {" "}
-              <FaMapPin className="text-primary" />{" "}
+              <FaMapPin className="text-primary" />
               <address className="text-zinc-300">Khulna, Bangladesh</address>
             </div>
 
             <p className="flex gap-1 items-center">
-              <IoCallSharp className="text-primary" />{" "}
+              <IoCallSharp className="text-primary" />
               <span className="text-zinc-300">+8801819769176</span>
             </p>
 
             <p className="flex gap-1 items-center">
-              <IoIosMail className="text-primary" />{" "}
+              <IoIosMail className="text-primary" />
               <Link
                 href={"mailto:mdalfaz.dev@gmail.com"}
                 target="_blank"
                 className="text-zinc-300"
               >
                 mdalfaz.dev@gmail.com
-              </Link>{" "}
+              </Link>
             </p>
           </div>
         </div>
@@ -140,7 +148,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 
