@@ -101,7 +101,7 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
             <Dropdown className="bg-transparent outline-none">
               <motion.div whileTap={{ scale: 0.97 }}>
                 <Button className="px-3 py-3 w-full rounded-lg h-auto justify-between bg-transparent dark:bg-white/1 text-zinc-500 dark:text-white/30 shadow-sm">
-                  {carType || car?.category || "Select type"} <ChevronDown />
+                  {carType || car?.carType || "Select type"} <ChevronDown />
                 </Button>
               </motion.div>
 

@@ -9,7 +9,7 @@ const UserBookingCard = ({ booking }) => {
   const {
     carImage,
     carName,
-    category,
+    carType,
     dailyRentPrice,
     bookingDate,
     pickupLocation,
@@ -43,12 +43,12 @@ const UserBookingCard = ({ booking }) => {
 
       {/* content */}
       <div className="p-4 space-y-3 col-span-4">
-        {/* title + category */}
+        {/* title + type */}
         <div className="flex items-start justify-between gap-2">
           <h2 className="text-lg font-semibold">{carName}</h2>
 
           <span className="text-xs px-2 py-1 rounded-full bg-[#B81D23]/20 border border-[#B81D23]/30">
-            {category}
+            {carType}
           </span>
         </div>
 

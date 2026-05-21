@@ -18,7 +18,7 @@ export const carAddAction = async (formData) => {
   const addedCarData = {
     userId,
     carName: carData?.carName,
-    category: carData?.carType,
+    carType: carData?.carType,
     dailyRentPrice: Number(carData?.rentPrice),
     seatCapacity: Number(carData?.seatCapacity),
     carImage: carData?.imageUrl,
@@ -118,7 +118,7 @@ export const bookingsAddAction = async (data) => {
     userName: user?.name,
     carName: car?.carName,
     carImage: car?.carImage,
-    category: car?.category,
+    carType: car?.carType,
     dailyRentPrice: Number(car?.dailyRentPrice),
     seatCapacity: Number(car?.seatCapacity),
     pickupLocation: car?.pickupLocation,

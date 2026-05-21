@@ -125,11 +125,6 @@ const CarDetailsCard = ({ car, bookingsAddAction }) => {
 
           <div className="flex flex-col gap-4 text-sm dark:text-gray-300">
             <p className="flex justify-between">
-              <span>Category</span>
-              <span>{car.category}</span>
-            </p>
-
-            <p className="flex justify-between">
               <span>Type</span>
               <span>{car.carType ? car.carType : "Type Not Mentioned"}</span>
             </p>

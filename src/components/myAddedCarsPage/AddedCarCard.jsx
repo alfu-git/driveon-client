@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { Button } from "@heroui/react";
-import { FaMapPin, FaEdit } from "react-icons/fa";
+import { FaMapPin, FaEdit, FaCar } from "react-icons/fa";
 import { TbArmchair } from "react-icons/tb";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -53,10 +53,14 @@ const AddedCarCard = ({ car, addedCarDeleteAction }) => {
         {/* price */}
         <div className="flex justify-between items-center">
           <span className="text-lg font-bold text-primary">
-            ৳{car.dailyRentPrice}/day
+            ${car.dailyRentPrice}/day
           </span>
 
-          <span className="text-sm">{car.category}</span>
+          <span className="flex gap-2 items-center">
+            <FaCar className="text-primary" />
+
+            <span>{car.carType}</span>
+          </span>
         </div>
 
         {/* info */}

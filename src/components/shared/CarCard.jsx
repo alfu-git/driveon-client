@@ -62,21 +62,17 @@ const CarCard = ({ car }) => {
 
         <h3 className="text-2xl font-semibold">{car.carName}</h3>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-baseline">
-            <span className="text-2xl font-bold">${car.dailyRentPrice}</span>
+        <div className="flex items-baseline">
+          <span className="text-2xl font-bold">${car.dailyRentPrice}</span>
 
-            <span className="text-sm ">/day</span>
-          </div>
-
-          <span className="text-sm">{car.category}</span>
+          <span className="text-sm ">/day</span>
         </div>
 
         <div className="flex items-center justify-between text-sm">
           <span className="flex gap-2 items-center">
             <FaCar className="text-primary" />
 
-            <span>{car.carType ? car.carType : "N/A"}</span>
+            <span>{car.carType}</span>
           </span>
 
           <span className="flex gap-2 items-center">
