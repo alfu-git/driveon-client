@@ -49,10 +49,10 @@ export const carAddAction = async (formData) => {
 
   if (result?.insertedId) {
     revalidatePath("/explore-cars");
-    redirect("/explore-cars");
+    return { success: true };
   }
 
-  return result;
+  return { success: true };
 };
 
 export const carEditAction = async (carId, formData) => {
@@ -177,7 +177,6 @@ export const bookingsAddAction = async (data) => {
 
   if (result?.insertedId) {
     revalidatePath("/my-bookings");
-    redirect("/my-bookings");
   }
 
   return result;

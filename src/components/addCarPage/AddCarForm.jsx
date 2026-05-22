@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import {
   Form,
   TextField,
@@ -19,10 +19,28 @@ import {
   FileText,
   ChevronDown,
 } from "lucide-react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const AddCarForm = ({ carAddAction }) => {
   const [carType, setCarType] = useState("");
   const [availability, setAvailability] = useState("");
+  const [isPending, startTransition] = useTransition();
+
+  const router = useRouter();
+
+  const handleSubmit = async (formData) => {
+    startTransition(async () => {
+      const res = await carAddAction(formData);
+
+      if (res.success) {
+        toast.success("Car Added Successfully");
+        router.push("/explore-cars");
+      } else {
+        toast.error("Something Went Wrong!");
+      }
+    });
+  };
 
   const inputGroupClass =
     "bg-[#FCFBF8] dark:bg-white/1 rounded-lg overflow-hidden  focus-within:ring-1 focus-within:ring-[#B81D23] focus-within:shadow-lg-[#B81D23] focus-within:shadow-[0_0_15px_rgb(184, 29, 35)] transition-all duration-200";
@@ -31,7 +49,7 @@ const AddCarForm = ({ carAddAction }) => {
 
   return (
     <div className="dark:bg-white/5 dark:backdrop-blur-md shadow-2xl p-8 md:p-10">
-      <Form action={carAddAction} className="space-y-6">
+      <Form action={handleSubmit} className="space-y-6">
         {/* car name */}
         <TextField isRequired>
           <Label>Car Name</Label>
@@ -65,7 +83,7 @@ const AddCarForm = ({ carAddAction }) => {
                 type="number"
                 min={30}
                 placeholder="1200"
-                className="pl-1 bg-transparent text-white"
+                className="pl-1 bg-transparent"
               />
             </InputGroup>
             <FieldError />
@@ -84,7 +102,7 @@ const AddCarForm = ({ carAddAction }) => {
                 type="number"
                 min={1}
                 placeholder="4"
-                className="pl-2 bg-transparent text-white"
+                className="pl-2 bg-transparent"
               />
             </InputGroup>
             <FieldError />
@@ -97,9 +115,9 @@ const AddCarForm = ({ carAddAction }) => {
 
           <Dropdown className="bg-transparent outline-none">
             <Button
-              className={
-                "px-3 py-3 w-full rounded-lg h-auto justify-between bg-transparent dark:bg-white/1 text-zinc-500 dark:text-white/30 shadow-sm"
-              }
+              className={`
+                px-3 py-3 w-full rounded-lg h-auto justify-between bg-transparent dark:bg-white/1  shadow-sm ${carType ? "text-[#020909]! font-bold dark:text-[#FAFAFA]!" : "text-zinc-500 dark:text-white/30 "}
+                `}
             >
               {carType || "Select type"} <ChevronDown />
             </Button>
@@ -190,9 +208,9 @@ const AddCarForm = ({ carAddAction }) => {
 
           <Dropdown className="bg-transparent outline-none">
             <Button
-              className={
-                "px-3 py-3 w-full rounded-lg h-auto justify-between bg-transparent dark:bg-white/1 text-zinc-500 dark:text-white/30 shadow-sm"
-              }
+              className={`
+            px-3 py-3 w-full rounded-lg h-auto justify-between bg-transparent dark:bg-white/1 shadow-sm ${availability ? "text-[#020909]! font-bold dark:text-[#FAFAFA]!" : "text-zinc-500 dark:text-white/30 "}
+              `}
             >
               {availability || "Availability"} <ChevronDown />
             </Button>
@@ -218,9 +236,10 @@ const AddCarForm = ({ carAddAction }) => {
 
         <Button
           type="submit"
+          isDisabled={isPending}
           className="w-full bg-[#B81D23] hover:bg-[#B81D23]/80 active:bg-[#8F161B]/90 rounded-md"
         >
-          Add Car Listing
+          {isPending ? "Adding..." : "Add Car Listing"}
         </Button>
       </Form>
     </div>

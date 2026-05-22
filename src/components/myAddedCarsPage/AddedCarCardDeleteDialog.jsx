@@ -1,27 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useTransition } from "react";
 import { TriangleExclamation } from "@gravity-ui/icons";
 import { AlertDialog, Button } from "@heroui/react";
 import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
 
 const AddedCarCardDeleteDialog = ({ car, addedCarDeleteAction }) => {
+  const [isPending, startTransition] = useTransition();
+
   const handleAddedCarDelete = async (carId) => {
-    try {
+    startTransition(async () => {
       const result = await addedCarDeleteAction(carId);
-      console.log(result);
-      console.log("car: ", car)
 
       if (result.deletedCount > 0) {
         toast.success(`${car.carName} remove from your garage`);
       } else {
         toast.error("Delete failed!");
       }
-    } catch (err) {
-      console.log(err);
-      toast.error("Something went wrong!");
-    }
+    });
   };
 
   return (
@@ -63,10 +60,11 @@ const AddedCarCardDeleteDialog = ({ car, addedCarDeleteAction }) => {
 
               <Button
                 onClick={() => handleAddedCarDelete(car?._id)}
+                isDisabled={isPending}
                 className="w-full"
                 variant="danger"
               >
-                Delete Forever
+                {isPending ? "Deleting..." : "Delete Forever"}
               </Button>
             </AlertDialog.Footer>
           </AlertDialog.Dialog>

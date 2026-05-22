@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import {
   Button,
   Dropdown,
@@ -12,13 +12,18 @@ import {
 } from "@heroui/react";
 import { ChevronDown } from "lucide-react";
 import { MdOutlineAddBox } from "react-icons/md";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const CarBookingModal = ({ car, bookingsAddAction }) => {
   const [note, setNote] = useState("");
   const [driverNeeded, setDriverNeeded] = useState("");
+  const [isPending, startTransition] = useTransition();
   const [errors, setErrors] = useState({});
 
-  const handleBooking = (e) => {
+  const router = useRouter();
+
+  const handleBooking = async (e) => {
     e.preventDefault();
 
     let newErrors = {};
@@ -41,14 +46,27 @@ const CarBookingModal = ({ car, bookingsAddAction }) => {
       note,
     };
 
-    return bookingsAddAction(formData);
+    startTransition(async () => {
+      const result = await bookingsAddAction(formData);
+
+      if (result?.insertedId) {
+        toast.success("Car Booking Successful");
+
+        setTimeout(() => {
+          router.push("/my-bookings");
+        }, 200);
+      } else {
+        toast.error("Something Went Wrong!");
+      }
+    });
   };
 
   return (
     <Modal>
       <Button
+        type="submit"
         isDisabled={!car.availabilityStatus}
-        className={`mt-4 w-fit px-6 ${
+        className={`w-full mt-2 ${
           car.availabilityStatus
             ? "bg-[#B81D23] hover:bg-[#a1161b]"
             : "bg-gray-600 cursor-not-allowed"
@@ -120,9 +138,10 @@ const CarBookingModal = ({ car, bookingsAddAction }) => {
                   {/* Submit */}
                   <Button
                     type="submit"
+                    isDisabled={isPending}
                     className="w-full bg-[#B81D23] hover:bg-[#a1161b] mt-2"
                   >
-                    Book Now
+                    {isPending ? "Processing..." : "Book Now"}
                   </Button>
                 </form>
               </Surface>

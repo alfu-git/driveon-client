@@ -1,17 +1,27 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { ArrowRightFromSquare } from "@gravity-ui/icons";
-import { Avatar, Button, Dropdown } from "@heroui/react";
+import { Avatar, Dropdown } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 const AvatarDropdown = ({ user }) => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLogOut = async () => {
-    await authClient.signOut();
-    router.push("/");
+    try {
+      setLoading(true);
+      await authClient.signOut();
+      router.push("/");
+      router.refresh();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -32,6 +42,7 @@ const AvatarDropdown = ({ user }) => {
         >
           {/* animated glow */}
           <div className="absolute inset-0 rounded-full bg-primary blur-sm animate-pulseGlow" />
+
           <Avatar className="relative z-10 cursor-pointer transition-transform duration-300">
             <Avatar.Image
               referrerPolicy="no-referrer"
@@ -71,14 +82,13 @@ const AvatarDropdown = ({ user }) => {
 
           <Dropdown.Item href={"/my-added-cars"}>My Added Cars</Dropdown.Item>
 
-          <Dropdown.Item>
-            <Button
-              onClick={handleLogOut}
-              className="px-0 h-auto bg-transparent text-[#020909]! dark:text-[#FAFAFA]! flex w-full items-center justify-between gap-2"
-            >
-              <label>Log Out</label>
-              <ArrowRightFromSquare className="size-3.5 text-primary" />
-            </Button>
+          <Dropdown.Item
+            onClick={handleLogOut}
+            disabled={loading}
+            className="flex items-center justify-between gap-2 cursor-pointer"
+          >
+            <span>{loading ? "Logging out..." : "Log Out"}</span>
+            <ArrowRightFromSquare className="size-3.5 text-primary" />
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown.Popover>
