@@ -64,13 +64,37 @@ export const carEditAction = async (carId, formData) => {
 
   const carData = Object.fromEntries(formData.entries());
 
-  const updatedCarData = {
-    category: carData?.carType,
-    dailyRentPrice: Number(carData?.rentPrice),
-    pickupLocation: carData?.pickupLocation,
-    description: carData?.description,
-    availabilityStatus: carData?.availability === "Available",
-  };
+  const updatedCarData = {};
+
+  //  car type
+  if (carData?.carType) {
+    updatedCarData.category = carData.carType;
+  }
+
+  //  price
+  if (carData?.rentPrice !== "") {
+    updatedCarData.dailyRentPrice = Number(carData.rentPrice);
+  }
+
+  //  location
+  if (carData?.pickupLocation) {
+    updatedCarData.pickupLocation = carData.pickupLocation;
+  }
+
+  //  description
+  if (carData?.description) {
+    updatedCarData.description = carData.description;
+  }
+
+  //  availability
+  if (carData?.availability !== undefined) {
+    updatedCarData.availabilityStatus = carData.availability === "true";
+  }
+
+  //  nothing to update
+  if (Object.keys(updatedCarData).length === 0) {
+    throw new Error("No fields updated");
+  }
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/added-cars/${carId}`,

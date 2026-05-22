@@ -14,8 +14,10 @@ import { MapPin, DollarSign, FileText, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 
 const CarUpdateForm = ({ car, carEditActionWrapper }) => {
-  const [carType, setCarType] = useState("");
-  const [availability, setAvailability] = useState("");
+  const [carType, setCarType] = useState(car?.carType || "");
+  const [availability, setAvailability] = useState(
+    car?.availabilityStatus ? "Available" : "Not Available",
+  );
   const [errors, setErrors] = useState({});
 
   const inputGroupClass =
@@ -23,7 +25,6 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
 
   const iconClass = "size-4 text-primary";
 
-  // animation style property
   const fadeUp = {
     hidden: { opacity: 0, y: 25 },
     visible: (i) => ({
@@ -40,8 +41,23 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
   const handleSubmit = (e) => {
     const newErrors = {};
 
-    if (!carType) newErrors.carType = "Please select car type";
-    if (!availability) newErrors.availability = "Please select availability";
+    const rentPrice = e.target.rentPrice.value.trim();
+    const pickupLocation = e.target.pickupLocation.value.trim();
+    const description = e.target.description.value.trim();
+
+    // 🔥 check if anything changed
+    const isChanged =
+      rentPrice ||
+      pickupLocation ||
+      description ||
+      carType !== car?.carType ||
+      availability !==
+        (car?.availabilityStatus ? "Available" : "Not Available");
+
+    if (!isChanged) {
+      e.preventDefault();
+      newErrors.general = "Please update at least one field";
+    }
 
     if (Object.keys(newErrors).length > 0) {
       e.preventDefault();
@@ -54,13 +70,18 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
-      className="dark:bg-white/5 dark:backdrop-blur-md shadow-2xl p-8 md:p-10"
+      className="dark:bg-white/5 dark:backdrop-blur-md shadow-2xl p-8 md:p-10 rounded-2xl"
     >
       <Form
         action={carEditActionWrapper}
         onSubmit={handleSubmit}
         className="space-y-6"
       >
+        {/* 🔴 General Error */}
+        {errors.general && (
+          <p className="text-red-500 text-sm text-center">{errors.general}</p>
+        )}
+
         {/* price */}
         <motion.div
           variants={fadeUp}
@@ -68,7 +89,7 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
           animate="visible"
           custom={1}
         >
-          <TextField isRequired>
+          <TextField>
             <Label>Daily Rent</Label>
 
             <InputGroup className={inputGroupClass}>
@@ -95,13 +116,13 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
           animate="visible"
           custom={2}
         >
-          <TextField isRequired>
+          <TextField>
             <Label>Car Type</Label>
 
-            <Dropdown className="bg-transparent outline-none">
+            <Dropdown>
               <motion.div whileTap={{ scale: 0.97 }}>
                 <Button className="px-3 py-3 w-full rounded-lg h-auto justify-between bg-transparent dark:bg-white/1 text-zinc-500 dark:text-white/30 shadow-sm">
-                  {carType || car?.carType || "Select type"} <ChevronDown />
+                  {carType || "Select type"} <ChevronDown />
                 </Button>
               </motion.div>
 
@@ -110,15 +131,12 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
                   <Dropdown.Item id="SUV">
                     <Label>SUV</Label>
                   </Dropdown.Item>
-
                   <Dropdown.Item id="Sedan">
                     <Label>Sedan</Label>
                   </Dropdown.Item>
-
                   <Dropdown.Item id="Hatchback">
                     <Label>Hatchback</Label>
                   </Dropdown.Item>
-                  
                   <Dropdown.Item id="Luxury">
                     <Label>Luxury</Label>
                   </Dropdown.Item>
@@ -127,10 +145,6 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
             </Dropdown>
 
             <input type="hidden" name="carType" value={carType} />
-
-            {errors.carType && (
-              <p className="text-sm text-red-500 mt-1">{errors.carType}</p>
-            )}
           </TextField>
         </motion.div>
 
@@ -141,7 +155,7 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
           animate="visible"
           custom={3}
         >
-          <TextField isRequired>
+          <TextField>
             <Label>Pickup Location</Label>
 
             <InputGroup className={inputGroupClass}>
@@ -166,7 +180,7 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
           animate="visible"
           custom={4}
         >
-          <TextField isRequired>
+          <TextField>
             <Label>Description</Label>
 
             <InputGroup className={inputGroupClass}>
@@ -191,17 +205,13 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
           animate="visible"
           custom={5}
         >
-          <TextField isRequired>
+          <TextField>
             <Label>Availability</Label>
 
-            <Dropdown className="bg-transparent outline-none">
+            <Dropdown>
               <motion.div whileTap={{ scale: 0.97 }}>
                 <Button className="px-3 py-3 w-full rounded-lg h-auto justify-between bg-transparent dark:bg-white/1 text-zinc-500 dark:text-white/30 shadow-sm">
-                  {availability ||
-                    (car?.availabilityStatus === true
-                      ? "Available"
-                      : "Not Available")}{" "}
-                  <ChevronDown />
+                  {availability} <ChevronDown />
                 </Button>
               </motion.div>
 
@@ -210,7 +220,6 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
                   <Dropdown.Item id="Available">
                     <Label>Available</Label>
                   </Dropdown.Item>
-
                   <Dropdown.Item id="Not Available">
                     <Label>Not Available</Label>
                   </Dropdown.Item>
@@ -218,12 +227,12 @@ const CarUpdateForm = ({ car, carEditActionWrapper }) => {
               </Dropdown.Popover>
             </Dropdown>
 
-            <input type="hidden" name="availability" value={availability} />
-
-            {errors.availability && (
-              <p className="text-sm text-red-500 mt-1">{errors.availability}</p>
-            )}
-            <FieldError />
+            {/* 🔥 backend boolean */}
+            <input
+              type="hidden"
+              name="availability"
+              value={availability === "Available"}
+            />
           </TextField>
         </motion.div>
 
